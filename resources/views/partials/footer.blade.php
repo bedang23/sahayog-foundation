@@ -42,6 +42,7 @@
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li><a href="{{ route('about') }}">About Us</a></li>
                     <li><a href="{{ route('programs') }}">Our Programs</a></li>
+                    <li><a href="{{ route('gallery') }}">Gallery</a></li>
                     <li><a href="{{ route('donate') }}">Donate</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>

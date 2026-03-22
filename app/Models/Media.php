@@ -21,14 +21,12 @@ class Media extends Model
         'caption',
         'category',
         'sort_order',
-        'meta',
     ];
 
     protected function casts(): array
     {
         return [
             'is_external' => 'boolean',
-            'meta' => 'array',
         ];
     }
 

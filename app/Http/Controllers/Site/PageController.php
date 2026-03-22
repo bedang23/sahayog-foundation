@@ -37,11 +37,6 @@ class PageController extends Controller
         return $this->renderPage('contact');
     }
 
-    public function gallery(): View
-    {
-        return $this->renderPage('gallery');
-    }
-
     private function renderPage(string $slug): View
     {
         $config = $this->cms->pageConfig($slug);

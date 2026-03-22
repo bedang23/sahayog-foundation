@@ -22,6 +22,7 @@
                 <li><a href="{{ route('home') }}" class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                 <li><a href="{{ route('about') }}" class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About</a></li>
                 <li><a href="{{ route('programs') }}" class="nav-link {{ request()->routeIs('programs') ? 'active' : '' }}">Programs</a></li>
+                <li><a href="{{ route('gallery') }}" class="nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a></li>
                 <li><a href="{{ route('contact') }}" class="nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
             </ul>
         </nav>
@@ -45,6 +46,7 @@
                 <li><a href="{{ route('home') }}" class="mobile-nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a></li>
                 <li><a href="{{ route('about') }}" class="mobile-nav-link {{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
                 <li><a href="{{ route('programs') }}" class="mobile-nav-link {{ request()->routeIs('programs') ? 'active' : '' }}">Programs</a></li>
+                <li><a href="{{ route('gallery') }}" class="mobile-nav-link {{ request()->routeIs('gallery') ? 'active' : '' }}">Gallery</a></li>
                 <li><a href="{{ route('contact') }}" class="mobile-nav-link {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
                 <li><a href="{{ route('donate') }}" class="mobile-nav-link mobile-nav-cta">Donate Now</a></li>
             </ul>

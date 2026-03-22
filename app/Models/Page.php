@@ -2,28 +2,29 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Page extends Model
 {
     protected $fillable = [
         'slug',
         'title',
-        'content',
-        'meta',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',
+        'og_title',
+        'og_description',
+        'og_image',
     ];
 
-    protected function casts(): array
+    public function getRouteKeyName(): string
     {
-        return [
-            'content' => 'array',
-            'meta' => 'array',
-        ];
+        return 'slug';
     }
 
-    public function media(): HasMany
+    public function sections(): HasMany
     {
-        return $this->hasMany(Media::class);
+        return $this->hasMany(PageSection::class);
     }
 }

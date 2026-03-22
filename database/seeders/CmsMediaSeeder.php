@@ -2,8 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Media;
-use App\Models\Page;
+use App\Models\Gallery;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Arr;
 
@@ -14,57 +13,16 @@ class CmsMediaSeeder extends Seeder
      */
     public function run(): void
     {
-        $pages = config('cms.pages', []);
+        $galleryItems = Arr::get(config('cms.pages', []), 'gallery.defaults.gallery_items', []);
 
-        foreach ($pages as $slug => $config) {
-            $page = Page::query()->firstWhere('slug', $slug);
-
-            if (! $page) {
-                continue;
-            }
-
-            $pageMedia = Arr::get($config, 'defaults.media', []);
-            foreach ($pageMedia as $key => $item) {
-                Media::query()->updateOrCreate(
-                    [
-                        'page_id' => $page->id,
-                        'group' => 'page',
-                        'key' => $key,
-                    ],
-                    [
-                        'disk' => $item['disk'] ?? 'public',
-                        'path' => $item['path'] ?? '',
-                        'is_external' => (bool) ($item['is_external'] ?? true),
-                        'alt_text' => $item['alt_text'] ?? null,
-                        'caption' => $item['caption'] ?? null,
-                        'category' => $item['category'] ?? null,
-                        'sort_order' => (int) ($item['sort_order'] ?? 0),
-                    ]
-                );
-            }
-
-            if (Arr::get($config, 'editor.uses_gallery_manager')) {
-                $galleryItems = Arr::get($config, 'defaults.gallery_items', []);
-
-                foreach ($galleryItems as $item) {
-                    Media::query()->updateOrCreate(
-                        [
-                            'page_id' => $page->id,
-                            'group' => 'gallery',
-                            'key' => $item['key'],
-                        ],
-                        [
-                            'disk' => $item['disk'] ?? 'public',
-                            'path' => $item['path'] ?? '',
-                            'is_external' => (bool) ($item['is_external'] ?? true),
-                            'alt_text' => $item['alt_text'] ?? null,
-                            'caption' => $item['caption'] ?? null,
-                            'category' => $item['category'] ?? null,
-                            'sort_order' => (int) ($item['sort_order'] ?? 0),
-                        ]
-                    );
-                }
-            }
+        foreach ($galleryItems as $item) {
+            Gallery::query()->updateOrCreate(
+                ['image_path' => $item['path'] ?? ''],
+                [
+                    'title' => $item['caption'] ?? null,
+                    'alt_text' => $item['alt_text'] ?? null,
+                ]
+            );
         }
     }
 }
