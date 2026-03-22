@@ -5,26 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    @php
+        $metaTitle = $meta['meta_title'] ?? trim($__env->yieldContent('meta_title')) ?: 'Sahayog Foundation — Empowering Communities';
+        $metaDescription = $meta['meta_description'] ?? trim($__env->yieldContent('meta_description')) ?: 'Sahayog Foundation is dedicated to uplifting underserved communities through education, health, and sustainable livelihoods.';
+        $metaKeywords = $meta['meta_keywords'] ?? trim($__env->yieldContent('meta_keywords')) ?: 'NGO, charity, donate, education, health, community, Sahayog Foundation';
+        $ogTitle = $meta['og_title'] ?? trim($__env->yieldContent('og_title')) ?: $metaTitle;
+        $ogDescription = $meta['og_description'] ?? trim($__env->yieldContent('og_description')) ?: $metaDescription;
+        $ogImage = $meta['og_image'] ?? trim($__env->yieldContent('og_image')) ?: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200';
+    @endphp
+
     {{-- SEO Meta --}}
-    <title>@yield('meta_title', 'Sahayog Foundation — Empowering Communities')</title>
-    <meta name="description" content="@yield('meta_description', 'Sahayog Foundation is dedicated to uplifting underserved communities through education, health, and sustainable livelihoods.')">
-    <meta name="keywords" content="@yield('meta_keywords', 'NGO, charity, donate, education, health, community, Sahayog Foundation')">
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDescription }}">
+    <meta name="keywords" content="{{ $metaKeywords }}">
     <meta name="robots" content="index, follow">
     <meta name="author" content="Sahayog Foundation">
 
     {{-- Open Graph --}}
     <meta property="og:type" content="website">
-    <meta property="og:title" content="@yield('og_title', 'Sahayog Foundation — Empowering Communities')">
-    <meta property="og:description" content="@yield('og_description', 'Sahayog Foundation is dedicated to uplifting underserved communities through education, health, and sustainable livelihoods.')">
-    <meta property="og:image" content="@yield('og_image', 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200')">
+    <meta property="og:title" content="{{ $ogTitle }}">
+    <meta property="og:description" content="{{ $ogDescription }}">
+    <meta property="og:image" content="{{ $ogImage }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:site_name" content="Sahayog Foundation">
 
     {{-- Twitter Card --}}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="@yield('og_title', 'Sahayog Foundation')">
-    <meta name="twitter:description" content="@yield('og_description', 'Empowering Communities Across India')">
-    <meta name="twitter:image" content="@yield('og_image', 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=1200')">
+    <meta name="twitter:title" content="{{ $ogTitle }}">
+    <meta name="twitter:description" content="{{ $ogDescription }}">
+    <meta name="twitter:image" content="{{ $ogImage }}">
 
     {{-- Canonical --}}
     <link rel="canonical" href="{{ url()->current() }}">

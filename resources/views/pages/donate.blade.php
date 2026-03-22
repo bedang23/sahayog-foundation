@@ -7,10 +7,24 @@
 
 @section('content')
 
+    @php
+        $heroMedia = $media['hero_background'] ?? ['url' => '', 'alt_text' => ''];
+        $impactCards = $content['impact_cards'] ?? [];
+        $trustBadges = $content['trust_badges'] ?? [];
+        $faqs = $content['faqs'] ?? [];
+
+        $trustIcons = [
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+            '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>',
+        ];
+    @endphp
+
     {{-- PAGE HERO --}}
     <section class="page-hero page-hero--short" aria-label="Donation Page Header">
         <div class="page-hero-bg" aria-hidden="true">
-            <img src="https://images.unsplash.com/photo-1532629345422-7515f3d16bb6?w=1600&auto=format&fit=crop&q=80" alt="" loading="eager" fetchpriority="high">
+            <img src="{{ $heroMedia['url'] }}" alt="{{ $heroMedia['alt_text'] }}" loading="eager" fetchpriority="high">
             <div class="page-hero-overlay"></div>
         </div>
         <div class="container page-hero-content">
@@ -19,8 +33,8 @@
                 <span aria-hidden="true">›</span>
                 <span aria-current="page">Donate</span>
             </nav>
-            <h1 class="page-hero-title reveal-up">Make a Difference Today</h1>
-            <p class="page-hero-sub reveal-up">Donations are eligible for 80G tax deduction under the Income Tax Act.</p>
+            <h1 class="page-hero-title reveal-up">{{ $content['hero_title'] ?? '' }}</h1>
+            <p class="page-hero-sub reveal-up">{{ $content['hero_subtitle'] ?? '' }}</p>
         </div>
     </section>
 
@@ -31,51 +45,31 @@
 
                 {{-- Left: Impact Info --}}
                 <aside class="donation-impact reveal-left" aria-label="Donation Impact">
-                    <h2 class="impact-title">Your Gift, Their Future</h2>
+                    <h2 class="impact-title">{{ $content['impact_title'] ?? '' }}</h2>
 
                     <div class="impact-cards">
-                        <div class="impact-card">
-                            <div class="impact-amount">₹500</div>
-                            <div class="impact-desc">Provides school supplies and books for one child for an entire year</div>
-                        </div>
-                        <div class="impact-card">
-                            <div class="impact-amount">₹1,000</div>
-                            <div class="impact-desc">Covers one month of nutrition supplements for 5 malnourished children</div>
-                        </div>
-                        <div class="impact-card">
-                            <div class="impact-amount">₹2,500</div>
-                            <div class="impact-desc">Funds a complete medical check-up for 10 people in a mobile health camp</div>
-                        </div>
-                        <div class="impact-card">
-                            <div class="impact-amount">₹5,000</div>
-                            <div class="impact-desc">Sponsors digital literacy training for one rural youth for 3 months</div>
-                        </div>
+                        @foreach($impactCards as $card)
+                            <div class="impact-card">
+                                <div class="impact-amount">{{ $card['amount'] ?? '' }}</div>
+                                <div class="impact-desc">{{ $card['desc'] ?? '' }}</div>
+                            </div>
+                        @endforeach
                     </div>
 
                     <div class="trust-badges" aria-label="Trust Indicators">
-                        <div class="trust-badge">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                            <span>Registered NGO (Trust Reg. No. MH-2010-1234)</span>
-                        </div>
-                        <div class="trust-badge">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                            <span>80G Tax Exemption Available</span>
-                        </div>
-                        <div class="trust-badge">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                            <span>100% Secure Transactions</span>
-                        </div>
-                        <div class="trust-badge">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                            <span>FCRA Approved for International Donors</span>
-                        </div>
+                        @foreach($trustBadges as $i => $badge)
+                            <div class="trust-badge">
+                                {!! $trustIcons[$i] ?? $trustIcons[0] !!}
+                                <span>{{ $badge }}</span>
+                            </div>
+                        @endforeach
                     </div>
                 </aside>
 
                 {{-- Right: Donation Form --}}
                 <div class="donation-form-wrap reveal-right" role="region" aria-label="Donation Form">
                     <div class="donation-form-card">
-                        <h2 class="form-heading">Choose Your Contribution</h2>
+                        <h2 class="form-heading">{{ $content['form_heading'] ?? 'Choose Your Contribution' }}</h2>
 
                         {{-- Frequency Toggle --}}
                         <div class="frequency-toggle" role="group" aria-label="Donation Frequency">
@@ -190,26 +184,17 @@
     <section class="section section-tinted" aria-label="Donation FAQs">
         <div class="container">
             <div class="section-header centered reveal-up">
-                <span class="section-eyebrow">Questions</span>
-                <h2 class="section-title">Frequently Asked</h2>
+                <span class="section-eyebrow">{{ $content['faq_eyebrow'] ?? 'Questions' }}</span>
+                <h2 class="section-title">{{ $content['faq_title'] ?? 'Frequently Asked' }}</h2>
             </div>
             <div class="faq-list reveal-up">
-                @php
-                    $faqs = [
-                        ['q' => 'Is my donation tax-deductible?', 'a' => 'Yes. Sahayog Foundation is registered under Section 12A and 80G of the Income Tax Act. All donations are eligible for 50% tax deduction. We will issue an 80G receipt within 48 hours.'],
-                        ['q' => 'Can I donate from outside India?', 'a' => 'Yes! We are FCRA approved and can accept international donations from individuals and organizations. Please contact us for FCRA bank details.'],
-                        ['q' => 'How is my donation used?', 'a' => 'At least 85% of all donations go directly to program expenses. We publish audited annual reports on our website. You can also opt to designate your donation to a specific program.'],
-                        ['q' => 'Can I set up a recurring donation?', 'a' => 'Yes. Monthly and annual recurring options are available. You can cancel or modify anytime by contacting us at info@sahayogfoundation.org.'],
-                        ['q' => 'Will I receive updates about my impact?', 'a' => 'Absolutely. All donors receive quarterly impact newsletters and annual reports. Major donors (₹25,000+) receive a personalized impact report.'],
-                    ];
-                @endphp
                 @foreach($faqs as $i => $faq)
                 <details class="faq-item" style="--delay: {{ $i * 0.06 }}s">
                     <summary class="faq-question">
-                        {{ $faq['q'] }}
+                        {{ $faq['q'] ?? '' }}
                         <svg class="faq-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
                     </summary>
-                    <div class="faq-answer">{{ $faq['a'] }}</div>
+                    <div class="faq-answer">{{ $faq['a'] ?? '' }}</div>
                 </details>
                 @endforeach
             </div>
