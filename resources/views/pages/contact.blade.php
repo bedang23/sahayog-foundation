@@ -7,10 +7,17 @@
 
 @section('content')
 
+    @php
+        $heroMedia = $media['hero_background'] ?? ['url' => '', 'alt_text' => ''];
+        $emails = $content['emails'] ?? [];
+        $primaryEmail = $emails[0] ?? 'info@sahayogfoundation.org';
+        $secondaryEmail = $emails[1] ?? null;
+    @endphp
+
     {{-- PAGE HERO --}}
     <section class="page-hero page-hero--short" aria-label="Contact Page Header">
         <div class="page-hero-bg" aria-hidden="true">
-            <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1600&auto=format&fit=crop&q=80" alt="" loading="eager" fetchpriority="high">
+            <img src="{{ $heroMedia['url'] }}" alt="{{ $heroMedia['alt_text'] }}" loading="eager" fetchpriority="high">
             <div class="page-hero-overlay"></div>
         </div>
         <div class="container page-hero-content">
@@ -19,8 +26,8 @@
                 <span aria-hidden="true">›</span>
                 <span aria-current="page">Contact</span>
             </nav>
-            <h1 class="page-hero-title reveal-up">Let's Connect</h1>
-            <p class="page-hero-sub reveal-up">We'd love to hear from you — whether you want to volunteer, partner, or simply say hello.</p>
+            <h1 class="page-hero-title reveal-up">{{ $content['hero_title'] ?? '' }}</h1>
+            <p class="page-hero-sub reveal-up">{{ $content['hero_subtitle'] ?? '' }}</p>
         </div>
     </section>
 
@@ -31,8 +38,8 @@
 
                 {{-- Contact Info --}}
                 <aside class="contact-info reveal-left" aria-label="Contact Details">
-                    <h2 class="contact-info-title">Get in Touch</h2>
-                    <p class="contact-info-sub">Our team typically responds within 1–2 business days.</p>
+                    <h2 class="contact-info-title">{{ $content['info_title'] ?? '' }}</h2>
+                    <p class="contact-info-sub">{{ $content['info_subtitle'] ?? '' }}</p>
 
                     <div class="contact-info-list">
                         <div class="contact-info-item">
@@ -41,11 +48,7 @@
                             </div>
                             <div>
                                 <div class="contact-info-label">Office Address</div>
-                                <address class="contact-info-value">
-                                    42, Gandhi Road, Shivajinagar<br>
-                                    Pune, Maharashtra 411001<br>
-                                    India
-                                </address>
+                                <address class="contact-info-value">{!! nl2br(e($content['address'] ?? '')) !!}</address>
                             </div>
                         </div>
 
@@ -55,8 +58,11 @@
                             </div>
                             <div>
                                 <div class="contact-info-label">Email Us</div>
-                                <a href="mailto:info@sahayogfoundation.org" class="contact-info-value">info@sahayogfoundation.org</a><br>
-                                <a href="mailto:programs@sahayogfoundation.org" class="contact-info-value">programs@sahayogfoundation.org</a>
+                                <a href="mailto:{{ $primaryEmail }}" class="contact-info-value">{{ $primaryEmail }}</a>
+                                @if($secondaryEmail)
+                                    <br>
+                                    <a href="mailto:{{ $secondaryEmail }}" class="contact-info-value">{{ $secondaryEmail }}</a>
+                                @endif
                             </div>
                         </div>
 
@@ -66,8 +72,8 @@
                             </div>
                             <div>
                                 <div class="contact-info-label">Phone</div>
-                                <a href="tel:+912012345678" class="contact-info-value">+91 20 1234 5678</a><br>
-                                <span class="contact-info-sub-note">Mon – Sat, 9am – 6pm IST</span>
+                                <a href="tel:{{ preg_replace('/\s+/', '', $content['phone'] ?? '') }}" class="contact-info-value">{{ $content['phone'] ?? '' }}</a><br>
+                                <span class="contact-info-sub-note">{{ $content['phone_note'] ?? '' }}</span>
                             </div>
                         </div>
 
@@ -77,14 +83,14 @@
                             </div>
                             <div>
                                 <div class="contact-info-label">Office Hours</div>
-                                <div class="contact-info-value">Monday – Saturday<br>9:00 AM – 6:00 PM IST</div>
+                                <div class="contact-info-value">{!! nl2br(e($content['hours'] ?? '')) !!}</div>
                             </div>
                         </div>
                     </div>
 
                     {{-- Social --}}
                     <div class="contact-social">
-                        <div class="contact-social-label">Follow Our Work</div>
+                        <div class="contact-social-label">{{ $content['social_label'] ?? 'Follow Our Work' }}</div>
                         <div class="social-links-row">
                             <a href="#" class="social-link-contact" aria-label="Facebook">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -105,11 +111,11 @@
                 {{-- Contact Form --}}
                 <div class="contact-form-wrap reveal-right">
                     <div class="contact-form-card" role="region" aria-label="Contact Form">
-                        <h2 class="form-heading">Send Us a Message</h2>
+                        <h2 class="form-heading">{{ $content['form_heading'] ?? 'Send Us a Message' }}</h2>
 
                         <div id="formSuccess" class="form-success-banner" aria-live="polite" hidden>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                            Thank you! We've received your message and will be in touch soon.
+                            {{ $content['form_success_text'] ?? "Thank you! We've received your message and will be in touch soon." }}
                         </div>
 
                         <div class="form-group">
@@ -159,7 +165,7 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                         </button>
 
-                        <p class="form-disclaimer">We respect your privacy. Your information will never be shared with third parties.</p>
+                        <p class="form-disclaimer">{{ $content['form_disclaimer'] ?? 'We respect your privacy. Your information will never be shared with third parties.' }}</p>
                     </div>
                 </div>
 
@@ -171,8 +177,8 @@
     <section class="map-section" aria-label="Office Location">
         <div class="container">
             <div class="map-header reveal-up">
-                <h2 class="section-title">Find Us</h2>
-                <p>42, Gandhi Road, Shivajinagar, Pune – 411001, Maharashtra</p>
+                <h2 class="section-title">{{ $content['map_title'] ?? 'Find Us' }}</h2>
+                <p>{{ $content['map_subtitle'] ?? '' }}</p>
             </div>
         </div>
         <div class="map-embed" role="complementary" aria-label="Google Map showing office location">
