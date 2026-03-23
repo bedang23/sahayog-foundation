@@ -39,140 +39,117 @@
     </section>
 
     {{-- DONATION SECTION --}}
-    <section class="donation-section section" aria-label="Donation Form">
+    <section class="donation-section section" aria-label="Donation Information">
         <div class="container">
-            <div class="donation-layout">
+            {{-- Section Header --}}
+            <div class="section-header centered reveal-up" style="margin-bottom: 3rem;">
+                <span class="section-eyebrow">Support Our Cause</span>
+                <h2 class="section-title">Ways to Donate</h2>
+                <p class="section-subtitle" style="max-width: 600px; margin: 0 auto;">Choose your preferred method to support our mission. Every contribution makes a difference.</p>
+            </div>
 
-                {{-- Left: Impact Info --}}
-                <aside class="donation-impact reveal-left" aria-label="Donation Impact">
-                    <h2 class="impact-title">{{ $content['impact_title'] ?? '' }}</h2>
+            <div class="donation-layout" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; align-items: start;">
 
-                    <div class="impact-cards">
-                        @foreach($impactCards as $card)
-                            <div class="impact-card">
-                                <div class="impact-amount">{{ $card['amount'] ?? '' }}</div>
-                                <div class="impact-desc">{{ $card['desc'] ?? '' }}</div>
+                {{-- Left: Bank Details --}}
+                <aside class="bank-details reveal-left" aria-label="Bank Information">
+                    <div class="donation-info-card" style="background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08); height: 100%;">
+                        {{-- Card Header with Icon --}}
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+                                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                    <line x1="1" y1="10" x2="23" y2="10"/>
+                                </svg>
                             </div>
-                        @endforeach
-                    </div>
-
-                    <div class="trust-badges" aria-label="Trust Indicators">
-                        @foreach($trustBadges as $i => $badge)
-                            <div class="trust-badge">
-                                {!! $trustIcons[$i] ?? $trustIcons[0] !!}
-                                <span>{{ $badge }}</span>
+                            <div>
+                                <h2 class="section-title" style="font-size: 1.5rem; margin: 0;">Bank Transfer</h2>
+                                <p class="section-subtitle" style="font-size: 0.875rem; color: #6b7280; margin: 0;">Direct bank transfer</p>
                             </div>
-                        @endforeach
+                        </div>
+
+                        <div class="bank-info-section" style="background: #f9fafb; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;">
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">Bank Name</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937;">State Bank of India</span>
+                            </div>
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">Account Holder</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937;">Sahayog Foundation</span>
+                            </div>
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">Account Number</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937; font-family: monospace;">1234567890</span>
+                            </div>
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">IFSC Code</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937; font-family: monospace;">SBIN0012345</span>
+                            </div>
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid #e5e7eb;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">Branch</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937;">Pune, Maharashtra</span>
+                            </div>
+                            <div class="bank-detail" style="display: flex; justify-content: space-between; padding: 0.75rem 0;">
+                                <span class="label" style="color: #6b7280; font-size: 0.875rem;">Account Type</span>
+                                <span class="value" style="font-weight: 600; color: #1f2937;">Current Account</span>
+                            </div>
+                        </div>
+
+                        <div class="donation-note" style="background: linear-gradient(135deg, rgba(249,115,22,0.08) 0%, rgba(251,191,36,0.08) 100%); border-radius: 12px; padding: 1.25rem; border-left: 4px solid #f97316;">
+                            <p style="font-weight: 600; color: #1f2937; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f97316" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                                Important Notes
+                            </p>
+                            <ul style="margin: 0; padding-left: 1.25rem; color: #4b5563; font-size: 0.875rem; line-height: 1.7;">
+                                <li>For donations above ₹2000, we will issue an 80G receipt</li>
+                                <li>After making a payment, please email us at <a href="mailto:info@sahayogfoundation.org" style="color: #f97316; text-decoration: underline;">info@sahayogfoundation.org</a> with your transaction details</li>
+                                <li>For any queries, please contact us at +91 98765 43210</li>
+                            </ul>
+                        </div>
                     </div>
                 </aside>
 
-                {{-- Right: Donation Form --}}
-                <div class="donation-form-wrap reveal-right" role="region" aria-label="Donation Form">
-                    <div class="donation-form-card">
-                        <h2 class="form-heading">{{ $content['form_heading'] ?? 'Choose Your Contribution' }}</h2>
-
-                        {{-- Frequency Toggle --}}
-                        <div class="frequency-toggle" role="group" aria-label="Donation Frequency">
-                            <button type="button" class="freq-btn active" data-freq="one-time">One-Time</button>
-                            <button type="button" class="freq-btn" data-freq="monthly">Monthly</button>
-                            <button type="button" class="freq-btn" data-freq="annual">Annual</button>
-                        </div>
-
-                        {{-- Amount Presets --}}
-                        <div class="amount-label">Select Amount (₹)</div>
-                        <div class="amount-grid" role="group" aria-label="Preset donation amounts">
-                            @foreach([500, 1000, 2500, 5000, 10000, 25000] as $amount)
-                            <button type="button" class="amount-btn {{ $amount === 1000 ? 'active' : '' }}" data-amount="{{ $amount }}" aria-pressed="{{ $amount === 1000 ? 'true' : 'false' }}">
-                                ₹{{ number_format($amount) }}
-                            </button>
-                            @endforeach
-                        </div>
-
-                        {{-- Custom Amount --}}
-                        <div class="custom-amount-wrap">
-                            <label for="customAmount" class="custom-label">Or enter a custom amount</label>
-                            <div class="custom-input-wrap">
-                                <span class="input-prefix" aria-hidden="true">₹</span>
-                                <input
-                                    type="number"
-                                    id="customAmount"
-                                    name="custom_amount"
-                                    placeholder="Enter amount"
-                                    min="100"
-                                    class="custom-input"
-                                    aria-describedby="minAmountHint"
-                                >
+                {{-- Right: QR Code --}}
+                <div class="qr-code-section reveal-right" aria-label="QR Code for UPI Payments">
+                    <div class="donation-info-card" style="background: #fff; border-radius: 16px; padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,0.08); height: 100%; text-align: center;">
+                        {{-- Card Header with Icon --}}
+                        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #f97316 0%, #fbbf24 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" aria-hidden="true">
+                                    <rect x="3" y="3" width="7" height="7"/>
+                                    <rect x="14" y="3" width="7" height="7"/>
+                                    <rect x="14" y="14" width="7" height="7"/>
+                                    <rect x="3" y="14" width="7" height="7"/>
+                                </svg>
                             </div>
-                            <span class="field-hint" id="minAmountHint">Minimum donation: ₹100</span>
+                        </div>
+                        <h2 class="section-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Scan to Donate</h2>
+                        <p class="section-subtitle" style="font-size: 0.875rem; color: #6b7280; margin-bottom: 2rem;">Use UPI for instant donations</p>
+
+                        <div class="qr-code-container" style="background: #fff; border: 2px solid #e5e7eb; border-radius: 16px; padding: 1.5rem; display: inline-block; margin-bottom: 1.5rem;">
+                            <img src="{{ asset('images/qr-code-donation.png') }}" alt="QR Code for Donation" class="qr-code" width="200" height="200" style="display: block;">
                         </div>
 
-                        {{-- Program Designation --}}
-                        <div class="program-select-wrap">
-                            <label for="programSelect" class="form-label">Designate to a program (optional)</label>
-                            <select id="programSelect" name="program" class="form-select">
-                                <option value="general">General Fund (Where Needed Most)</option>
-                                <option value="education">Education</option>
-                                <option value="health">Healthcare</option>
-                                <option value="livelihood">Livelihoods</option>
-                                <option value="environment">Environment</option>
-                                <option value="women">Women Empowerment</option>
-                            </select>
-                        </div>
-
-                        <div class="divider" aria-hidden="true"></div>
-
-                        {{-- Donor Details --}}
-                        <h3 class="form-subheading">Your Details</h3>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="donorName" class="form-label">Full Name <span class="required" aria-label="required">*</span></label>
-                                <input type="text" id="donorName" name="name" class="form-input" placeholder="Rajesh Kumar" required autocomplete="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="donorPan" class="form-label">PAN Number <span class="field-hint-inline">(for 80G receipt)</span></label>
-                                <input type="text" id="donorPan" name="pan" class="form-input" placeholder="ABCDE1234F" maxlength="10">
+                        <div class="qr-info" style="background: #f9fafb; border-radius: 12px; padding: 1.25rem;">
+                            <p class="qr-note" style="color: #6b7280; font-size: 0.875rem; margin-bottom: 0.75rem;">Scan with any UPI app to donate instantly</p>
+                            <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #fff; border: 1px solid #e5e7eb; border-radius: 8px; padding: 0.75rem 1rem;">
+                                <span style="color: #6b7280; font-size: 0.875rem;">UPI ID:</span>
+                                <span class="qr-upi-id" style="font-weight: 700; color: #f97316; font-family: monospace;">sahayogfoundation@upi</span>
+                                <button type="button" onclick="navigator.clipboard.writeText('sahayogfoundation@upi')" style="background: none; border: none; cursor: pointer; padding: 0.25rem;" title="Copy UPI ID">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="donorEmail" class="form-label">Email <span class="required" aria-label="required">*</span></label>
-                                <input type="email" id="donorEmail" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
-                            </div>
-                            <div class="form-group">
-                                <label for="donorPhone" class="form-label">Phone</label>
-                                <input type="tel" id="donorPhone" name="phone" class="form-input" placeholder="+91 98765 43210" autocomplete="tel">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="donorMessage" class="form-label">Message (optional)</label>
-                            <textarea id="donorMessage" name="message" class="form-textarea" rows="3" placeholder="A note about why you're donating..."></textarea>
-                        </div>
-
-                        {{-- Summary --}}
-                        <div class="donation-summary" aria-live="polite" aria-label="Donation Summary">
-                            <div class="summary-row">
-                                <span>Donation Amount</span>
-                                <strong id="summaryAmount">₹1,000</strong>
-                            </div>
-                            <div class="summary-row">
-                                <span>Tax Benefit (30% of ₹1,000)</span>
-                                <strong id="summaryTax" class="text-green">- ₹300</strong>
-                            </div>
-                            <div class="summary-row summary-total">
-                                <span>Your Net Cost</span>
-                                <strong id="summaryNet">₹700</strong>
+                        {{-- Supported Apps --}}
+                        <div style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+                            <p style="font-size: 0.75rem; color: #9ca3af; margin-bottom: 0.75rem;">Supported UPI Apps</p>
+                            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                                <span style="font-size: 0.75rem; color: #6b7280; background: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 999px;">Google Pay</span>
+                                <span style="font-size: 0.75rem; color: #6b7280; background: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 999px;">PhonePe</span>
+                                <span style="font-size: 0.75rem; color: #6b7280; background: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 999px;">Paytm</span>
+                                <span style="font-size: 0.75rem; color: #6b7280; background: #f3f4f6; padding: 0.25rem 0.75rem; border-radius: 999px;">BHIM</span>
                             </div>
                         </div>
-
-                        <button type="button" class="btn btn-primary btn-full btn-lg donate-submit" id="donateBtn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                            Proceed to Donate ₹1,000
-                        </button>
-
-                        <p class="form-disclaimer">By donating, you agree to our <a href="#">Privacy Policy</a>. This is a demo form — no real payment will be processed.</p>
                     </div>
                 </div>
 
